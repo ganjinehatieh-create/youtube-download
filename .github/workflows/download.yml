@@ -19,6 +19,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install QuickJS (required for yt-dlp)
+        run: |
+          # Download and install QuickJS binary
+          wget https://bellard.org/quickjs/quickjs-linux-x86_64-2024-01-13.tar.xz
+          tar -xf quickjs-linux-x86_64-2024-01-13.tar.xz
+          sudo cp quickjs-2024-01-13/qjs /usr/local/bin/
+          qjs --version
+          echo "QuickJS installed successfully"
+
       - name: Install yt-dlp
         run: |
           curl -sL https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp \
@@ -33,13 +42,17 @@ jobs:
           if [ -n "$YOUTUBE_COOKIES" ]; then
             echo "$YOUTUBE_COOKIES" > /tmp/yt-cookies.txt
             echo "COOKIES_FILE=/tmp/yt-cookies.txt" >> $GITHUB_ENV
+            echo "Cookies file configured"
+          else
+            echo "No cookies provided - downloads may be rate-limited"
           fi
 
       - name: Process pending videos
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
-        run: python scripts/process.py
+        run: |
+          python scripts/process.py
 
       - name: Commit updated videos.json
         run: |
@@ -47,5 +60,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add videos.json
           git diff --staged --quiet || \
-            git commit -m "chore: update download statuses [skip ci]"
-          git push
+            git commit -m "chore: update download statuses [skip ci]" && \
+            git push
