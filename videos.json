@@ -1,12 +1,12 @@
 [
   {
     "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "status": "pending",
-    "title": null,
-    "release_tag": null,
-    "release_url": null,
+    "status": "done",
+    "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+    "release_tag": "yt-dQw4w9WgXcQ.f398",
+    "release_url": "https://github.com/alihamzhei/youtube-download/releases/tag/yt-dQw4w9WgXcQ.f398",
     "error": null,
     "added_at": "2026-05-03",
-    "downloaded_at": null
+    "downloaded_at": "2026-05-03"
   }
 ]
