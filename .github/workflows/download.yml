@@ -298,7 +298,7 @@ jobs:
 
               {
                 printf '# %s\n\n' "${VIDEO_TITLE}"
-                printf '---\n\n'
+                printf '%s\n\n' '---'
                 printf '## اطلاعات ویدیو\n\n'
                 printf '| مشخصه | مقدار |\n'
                 printf '|--------|-------|\n'
@@ -335,7 +335,7 @@ jobs:
 
               {
                 printf '# %s\n\n' "${VIDEO_TITLE}"
-                printf '---\n\n'
+                printf '%s\n\n' '---'
                 printf '## اطلاعات ویدیو\n\n'
                 printf '| مشخصه | مقدار |\n'
                 printf '|--------|-------|\n'
@@ -362,7 +362,7 @@ jobs:
 
               {
                 printf '# %s\n\n' "${VIDEO_TITLE}"
-                printf '---\n\n'
+                printf '%s\n\n' '---'
                 printf '## اطلاعات ویدیو\n\n'
                 printf '| مشخصه | مقدار |\n'
                 printf '|--------|-------|\n'
@@ -436,7 +436,7 @@ jobs:
               RANDOM_EMOJI="${VIDEO_EMOJIS[$RANDOM % ${#VIDEO_EMOJIS[@]}]}"
               FOLDER_ENCODED=$(urlencode "$FOLDER_NAME")
               FOLDER_LINK="https://github.com/${REPO_OWNER}/${REPO_NAME}/tree/${BRANCH}/videos/${FOLDER_ENCODED}"
-              printf -- "- %s - %s [%s](%s)\n" "$NUM" "$RANDOM_EMOJI" "$FOLDER_NAME" "$FOLDER_LINK" >> VIDEOS.md
+              printf '%s\n' "- $NUM - $RANDOM_EMOJI [$FOLDER_NAME]($FOLDER_LINK)" >> VIDEOS.md
             done
             echo "VIDEOS.md regenerated with $NUM videos"
           }
